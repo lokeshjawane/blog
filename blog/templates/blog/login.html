@@ -1,0 +1,7 @@
+<form action="{% url 'blog:login' %}" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+    <input type="text" name="username" onClick="this.value='';" value="Enter user name" />
+    <input type="text" name="password" onClick="this.value='';" value="password" />
+    <input type="submit" value="submit" />
+    {{ editor.as_p }}
+</form>

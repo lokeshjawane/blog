@@ -1,0 +1,16 @@
+
+<html>
+{% autoescape off %}
+<body>
+{% if bloglist %}
+    {% for blog in bloglist %}
+        {{ blog.content }}</br>
+    {% endfor %}
+    {% else %}
+    <p>No contacts are available.</p>
+{% endif %}
+</body>
+{% endautoescape %}
+</html>
+
+ <!-- {{ bloglist }} -->

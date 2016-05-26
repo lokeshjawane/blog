@@ -1,0 +1,56 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    $("#uploadFile").on("change", function()
+    {
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+        if (/^image/.test( files[0].type)){ // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function(){ // set image data as background of div
+                $("#imagePreview").css("background-image", "url("+this.result+")");
+            }
+        }
+    });
+});
+</script>
+<style>
+#imagePreview {
+    width: 180px;
+    height: 180px;
+    float:left;
+    alignment: right;
+    background-position: center center;
+    background-size: cover;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    display: inline-block;
+}
+
+#nav {
+    line-height:30px;
+    #background-color:#eeeeee;
+    height:300px;
+    width:170px;
+    float:left;
+    padding:5px;
+}
+
+</style>
+<form action="{% url 'blog:register' %}" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<div id="nav">
+    <input type="text" name="username" onClick="this.value='';" value="Enter user name" /><br>
+    <input type="text" name="email" onClick="this.value='';" value="email" /><br>
+    <input type="text" name="password1" onClick="this.value='';" value="password" /><br>
+    <input type="text" name="password2" onClick="this.value='';" value="password confirm" /><br>
+    <input type="submit" value="submit" />
+
+</div>
+<div id="imagePreview">
+    <input id="uploadFile" type="file" name="image" class="img" />
+</div>
+
+</form>

@@ -1,0 +1,6 @@
+<form action="{% url 'blog:saveblog' %}" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ blog_form.media }}
+	{{ blog_form.as_p }}
+	<input type="submit"/>
+</form>
