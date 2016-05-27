@@ -61,7 +61,7 @@ def saveblog(request):
 
 @login_required(login_url="/login/")
 def user_edit(request, use_id):
-    #if request.method == "POST":
-    #    print "sdfsdf"
-    #else:
+    if request.method == "POST":
+        return HttpResponse('sdfsdffggg')
+    else:
         return render(request, 'blog/user_edit.html', {'use': User.objects.get(id=use_id)})

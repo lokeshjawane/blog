@@ -39,7 +39,7 @@ $(function() {
 }
 
 </style>
-<form action="{% url 'blog:user_edit' %}" method="post" enctype="multipart/form-data">
+<form action="{% url 'blog:user_edit' use.id%}" method="post" enctype="multipart/form-data">
 {% csrf_token %}
 <div id="nav">
     <input type="text" name="username" onClick="this.value='';" value="{{use.username}}" /><br>
