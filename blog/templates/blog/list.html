@@ -1,4 +1,4 @@
-
+<!--
 <html>
 {% autoescape off %}
 <body>
@@ -13,4 +13,6 @@
 {% endautoescape %}
 </html>
 
- <!-- {{ bloglist }} -->
+  {{ bloglist }} -->
+
+{{ use.username }} &nbsp; {{ use.email }} <a href="{% url 'blog:user_edit' use.id %}">Edit</a>
