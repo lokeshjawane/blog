@@ -1,0 +1,6 @@
+{{ contact.id }}.&nbsp{{ contact.fname }} {{ contact.mname }} {{ contact.lname }}
+<ul>
+{% for comment in contact.comments_set.all %}
+    <li>{{ comment.comment }}</li>
+{% endfor %}
+</ul>

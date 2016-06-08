@@ -1,0 +1,14 @@
+
+<form action="{% url 'contacts:updatecon' %}" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+{% if contact %}
+<input type="text" value="{{ contact.fname}}" name="fname" />
+<input type="text" value="{{ contact.mname}}" name="mname" />
+<input type="text" value="{{ contact.lname}}" name="lname" />
+ {{ img.as_p }}
+<input type="hidden" value="{{ contact.id}}" name="id" />
+<input type="submit" value="save" />
+{% else %}
+    <p>No contacts are available.</p>
+{% endif %}
+</form>

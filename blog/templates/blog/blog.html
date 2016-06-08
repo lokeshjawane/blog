@@ -1,5 +1,6 @@
 <form action="{% url 'blog:saveblog' %}" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
+	<h5>Blog Name</h5><input type="text" name="blog_title" maxlength="200"/>
 	{{ blog_form.media }}
 	{{ blog_form.as_p }}
 	<input type="submit"/>

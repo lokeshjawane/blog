@@ -1,0 +1,10 @@
+
+
+<form action="{% url 'contacts:addcon' %}" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+    <input type="text" name="fname" onClick="this.value='';" value="Enter fname" />
+    <input type="text" name="mname" onClick="this.value='';" value="Enter mname" />
+    <input type="text" name="lname" onClick="this.value='';" value="Enter lname" />
+    {{ img.as_p }}
+<input type="submit" value="Add" />
+</form>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>sdfsdf</title>
+	 {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'contacts/mystyle.css' %}" />
+</head>
+<body>
+<h2>language is : {{ language }}</h2><a href="{% url 'contacts:logout_view' %}">logout</a>
+{% if cntct %}
+    <ul>
+    {% for contact in cntct %}
+        <li><a href="{% url 'contacts:detail' contact.id %}">{{ contact.fname }} </a> &nbsp  <a href="{% url 'contacts:edit' contact.id %}">Edit</a>  <a href="{% url 'contacts:delete' contact.id %}">Delete</a></li> </br>
+        <img src="{{ contact.image.url }}" width='700px' height='400px' alt="{{ contact.image.name }}"></br> 
+         <ul>
+		{% for comment in contact.comments_set.all %}
+		    <li>{{ comment.comment }}</li>
+		{% endfor %}
+		</ul>
+        <form action="{% url 'contacts:addcomm' contact.id %}" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+    		<input type="text" name="comment" onClick="this.value='';" value="Enter Comment" />
+			<input type="submit" value="Add" />
+		</form>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No contacts are available.</p>
+{% endif %}
+
+<form action="{% url 'contacts:new' %}" method="post">
+{% csrf_token %}
+<input type="submit" value="New" />
+</form>
+</body>
+</html>

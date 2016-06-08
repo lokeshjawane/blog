@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from blog.forms import Blogeditor
-from .models import *
+from .models import Blog, Bloger
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
@@ -46,9 +46,9 @@ def register(request):
 
 #@login_required(login_url="/login/")
 def newblog(request):
-    #blog_form = Blogeditor()
-    #return render(request, 'blog/blog.html', {'blog_form': blog_form})
-    return render(request, 'blog/list.html', {'use': User.objects.get(id=request.session['user_id'])})
+    blog_form = Blogeditor()
+    return render(request, 'blog/blog.html', {'blog_form': blog_form})
+    #return render(request, 'blog/list.html', {'use': User.objects.get(id=request.session['user_id'])})
 
 def saveblog(request):
     if request.method == 'POST':
@@ -56,12 +56,19 @@ def saveblog(request):
         blogcont = Blog(content=text)
         blogcont.save()
 
-    return HttpResponse()
-    #return render(request, 'blog/list.html', {'bloglist': Blog.objects.values()})
+    #return HttpResponse()
+    return render(request, 'blog/list.html', {'bloglist': Blog.objects.values()})
 
 @login_required(login_url="/login/")
 def user_edit(request, use_id):
     if request.method == "POST":
-        return HttpResponse('sdfsdffggg')
+        blgr = Bloger(user_id_id=use_id, designation=request.POST['designation'], description=request.POST['description'])
+        blgr.save()
+        return render(request, 'blog/user_edit.html', {'use': User.objects.get(id=use_id)})
+        #return HttpResponse(request.session['user_id'])
     else:
         return render(request, 'blog/user_edit.html', {'use': User.objects.get(id=use_id)})
+
+
+def error404(request):
+    return render(request,'404.html')
