@@ -1,2 +1,2 @@
 django==1.8
-django-ckeditor==5.0.3
+django-ckeditor==5.0
